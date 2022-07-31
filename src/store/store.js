@@ -1,10 +1,9 @@
 import { createStore,combineReducers } from 'redux';
-// const rootReducer = combineReducers(
-
-// )
+import { studentListReducer } from './reducers/studentListReducer';
 
 
 
-// const store = createStore();
 
-// export default store;
+const store = createStore(studentListReducer);
+
+export default store;
