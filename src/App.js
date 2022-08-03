@@ -6,6 +6,7 @@ import StudentList from "./component/StudentList";
 import TeachersList from "./component/TeachersList";
 import ContactUs from "./component/ContactcUs";
 import NotFound from "./component/NotFound";
+import AddStudent from "./component/AddStudent";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <div>
       <nav className="navbar-container">
         <Link to="/">Home</Link> |{" "}
+        <Link to="/addstudent">Add Student</Link> |{" "}
         <Link to="about">About</Link>|{" "}
         <Link to="/teacher">Teachers</Link> |{" "}
         <Link to="contact">Contact US</Link>
@@ -24,6 +26,7 @@ export default function App() {
           <Route path="/about" element={<AboutUs/>} />
           <Route exact path="/teacher" element={<TeachersList/>} />
           <Route path="/contact" element={<ContactUs/>} />
+          <Route path="/addstudent" element={<AddStudent/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
