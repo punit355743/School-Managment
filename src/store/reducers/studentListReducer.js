@@ -28,6 +28,13 @@ export const studentListReducer = (state = initialState, action) => {
                 studentList: [],
                 error: action.payload
             }
+            case Actions.UPDATE_STUDENT_LIST:
+                const studetList  = [...state.studentList];
+                return {
+                    loading: false,
+                    studentList: studetList.concat(action.payload),
+                    error: action.payload
+                }
 
         default:
             return state

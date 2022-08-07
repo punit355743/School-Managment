@@ -9,7 +9,7 @@ import { fetchStudentlist, fetchStudentlistSucess, fetchStudentlistError } from 
 const StudentList = () => {
   const dispatch = useDispatch();
   const navigate =  useNavigate();
-  const { loading, studentList, error } = useSelector((state) => state);
+  const { loading, studentList, error } = useSelector((state) => state.studentlist);
   console.log(loading, studentList, error);
   const [rowData,setRowData] = useState([]);
   const [columnDefs] = useState([
