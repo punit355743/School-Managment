@@ -29,10 +29,10 @@ export const studentListReducer = (state = initialState, action) => {
                 error: action.payload
             }
             case Actions.UPDATE_STUDENT_LIST:
-                const studetList  = [...state.studentList];
+                const studetList  = [...state.studentList,action.payload];
                 return {
                     loading: false,
-                    studentList: studetList.concat(action.payload),
+                    studentList:studetList,
                     error: action.payload
                 }
 

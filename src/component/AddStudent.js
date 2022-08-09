@@ -1,10 +1,14 @@
 import { ColumnGroup } from 'ag-grid-community';
 import React, { useState,useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { updateStudentList } from './../store/actions/actionCreators'
+
+import { useNavigate } from 'react-router-dom';
 import './addstudent.css';
 
 const AddStudent = (props) => {
-
+ 
+  const navigate =  useNavigate();
   const [name,setName]= useState('');
   const [age,setAge]= useState('');
   const [marks,setMarks]= useState('');
@@ -15,7 +19,16 @@ const AddStudent = (props) => {
   const  studentForm = useSelector((state) => state.studentForm);
 
     const onclickHandler =()=>{
-      console.log(name,age,marks,subject)
+      const newStudent = {
+        "id": 200,
+        "name": name,
+        "subject": subject,
+        "marks": marks,
+        "age":age
+      }
+      dispatch(updateStudentList(newStudent));
+      setshowmsg("Successfully saved record!!");
+      navigate('/');
     }
 
     useEffect(()=>{
@@ -31,6 +44,7 @@ const AddStudent = (props) => {
     
     return (
       <form className="add-new-student-form" >
+        {showmsg && <p style={{color:'green'}}>{showmsg}</p>}
         <div class="form-group">
           <label for="nameinput">Name</label>
           <input onChange={(e)=>{setName(e.target.value)}} value= {name} type="text" class="form-control" id="nameinput" placeholder="Enter your name"/>
