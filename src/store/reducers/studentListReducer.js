@@ -28,13 +28,22 @@ export const studentListReducer = (state = initialState, action) => {
                 studentList: [],
                 error: action.payload
             }
-            case Actions.UPDATE_STUDENT_LIST:
+            case Actions.NEW_STUDENT_ADD_IN_CLASS:
                 const studetList  = [...state.studentList,action.payload];
                 return {
                     loading: false,
                     studentList:studetList,
                     error: action.payload
                 }
+
+                case Actions.UPDATE_STUDENT_LIST:
+                // const studetList  = [...state.studentList,action.payload];
+                return {
+                    loading: false,
+                    studentList:[],
+                    error: action.payload
+                }
+
 
         default:
             return state

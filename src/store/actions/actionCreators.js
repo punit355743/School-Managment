@@ -11,6 +11,10 @@ export const fetchStudentlistError = (error) => {
     return { type: Actions.STUDENT_LIST_ERROR, payload: error }
 }
 
+export const addnewStudentinClass = (student) => {
+    return { type: Actions.NEW_STUDENT_ADD_IN_CLASS, payload: student }
+}
+
 export const updateStudentList = (student) => {
     return { type: Actions.UPDATE_STUDENT_LIST, payload: student }
 }

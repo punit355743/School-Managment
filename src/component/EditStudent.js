@@ -1,22 +1,30 @@
 import { ColumnGroup } from 'ag-grid-community';
 import React, { useState,useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addnewStudentinClass } from './../store/actions/actionCreators'
+import { updateStudentList } from './../store/actions/actionCreators'
 
 import { useNavigate } from 'react-router-dom';
 import './addstudent.css';
 
-const AddStudent = (props) => {
+const EditStudent = ({studentDetails}) => {
+
+  console.log('name',studentDetails)
  
   const navigate =  useNavigate();
-  const [name,setName]= useState('');
-  const [age,setAge]= useState('');
-  const [marks,setMarks]= useState('');
-  const [subject,setSubject]= useState('Math');
+  const [name,setName]= useState(studentDetails.name);
+  const [age,setAge]= useState(studentDetails.age);
+  const [marks,setMarks]= useState(studentDetails.marks);
+  const [subject,setSubject]= useState(studentDetails.subject);
   const [valid,setValid] = useState(false);
   const [showmsg,setshowmsg] = useState(null);
   const dispatch = useDispatch();
   const  studentForm = useSelector((state) => state.studentForm);
+
+
+  // useEffect(()=>{
+  //   setName
+
+  // },[studentDetails])
 
     const onclickHandler =()=>{
       const newStudent = {
@@ -26,7 +34,7 @@ const AddStudent = (props) => {
         "marks": marks,
         "age":age
       }
-      dispatch(addnewStudentinClass(newStudent));
+      dispatch(updateStudentList(newStudent));
       setshowmsg("Successfully saved record!!");
       navigate('/');
     }
@@ -43,7 +51,7 @@ const AddStudent = (props) => {
 
     
     return (
-      <form className="add-new-student-form" >
+      <form className="edit-student-form" >
         {showmsg && <p style={{color:'green'}}>{showmsg}</p>}
         <div class="form-group">
           <label for="nameinput">Name</label>
@@ -67,9 +75,9 @@ const AddStudent = (props) => {
             <option value="Computer">Computer</option>
           </select>
         </div>     
-        <button type="button" disabled={!valid} className="btn btn-primary" onClick={onclickHandler}>Add new student</button>  
+        <button type="button" disabled={!valid} style={{margin:'20px 0'}}className="btn btn-primary" onClick={onclickHandler}>Add new student</button>  
       </form>
     );
 }
 
-export default AddStudent;
+export default EditStudent;
