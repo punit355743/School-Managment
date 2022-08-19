@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect, useRef,useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 
@@ -8,8 +8,11 @@ import EditStudent from './EditStudent';
 
 const StudentList = () => {
   const navigate = useNavigate();
+  const [chnageTheme,setChangeTheme] = useState('green')
+  const gridRef = useRef();
   const [rowData, setRowData] = useState([]);
   const { loading, studentList, error } = useSelector((state) => state.studentlist);
+  
   const [studentDetails,setStudentDetails] = useState({
     id: '',
     name: '',
@@ -36,18 +39,31 @@ const StudentList = () => {
     setStudentDetails(row.data)
   }
 
+  const onBtnExport = useCallback(() => {
+    gridRef.current.api.exportDataAsCsv();
+  }, []);
+
+  const onChangeTheme =  ()=>{
+    chnageTheme ==='green' ? setChangeTheme('red') : setChangeTheme('green');
+  }
+
   return (
 
-    <div>
+    <div style={{backgroundColor:chnageTheme}}>
       <div class="row">
         <div class="col-7">
           <div className="ag-theme-alpine" style={{ height: 400}} >
             <AgGridReact
+             ref={gridRef}
               rowData={rowData}
               columnDefs={columnDefs}
               onRowClicked={onRowClicked} >
             </AgGridReact>
             <button type="button" className="btn btn-primary" onClick={onclickHandler}>Add new student</button>
+            <button type="button" className="btn btn-primary" onClick={onChangeTheme}>Change Theme</button>
+          <div style={{ margin: '10px 0' }}>
+          <button onClick={onBtnExport}>Download CSV export file</button>
+        </div>
           </div>
         </div>
         <div class="col-5">
@@ -63,7 +79,7 @@ const StudentList = () => {
   )
 }
 
-export default StudentList
+export default React.memo(StudentList)
 
 
 

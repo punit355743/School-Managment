@@ -8,7 +8,7 @@ import './addstudent.css';
 
 const EditStudent = ({studentDetails}) => {
 
-  console.log('name',studentDetails)
+  console.log("edit component render")
  
   const navigate =  useNavigate();
   const [name,setName]= useState(studentDetails.name);
@@ -21,22 +21,17 @@ const EditStudent = ({studentDetails}) => {
   const  studentForm = useSelector((state) => state.studentForm);
 
 
-  // useEffect(()=>{
-  //   setName
-
-  // },[studentDetails])
-
     const onclickHandler =()=>{
       const newStudent = {
-        "id": 200,
+        "id": studentDetails.id,
         "name": name,
         "subject": subject,
         "marks": marks,
         "age":age
       }
       dispatch(updateStudentList(newStudent));
-      setshowmsg("Successfully saved record!!");
-      navigate('/');
+      // setshowmsg("Successfully saved record!!");
+      // navigate('/');
     }
 
     useEffect(()=>{
@@ -75,9 +70,9 @@ const EditStudent = ({studentDetails}) => {
             <option value="Computer">Computer</option>
           </select>
         </div>     
-        <button type="button" disabled={!valid} style={{margin:'20px 0'}}className="btn btn-primary" onClick={onclickHandler}>Add new student</button>  
+        <button type="button" disabled={!valid} style={{margin:'20px 0'}}className="btn btn-primary" onClick={onclickHandler}>Update student</button>  
       </form>
     );
 }
 
-export default EditStudent;
+export default React.memo(EditStudent);

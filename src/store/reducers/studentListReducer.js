@@ -33,15 +33,16 @@ export const studentListReducer = (state = initialState, action) => {
                 return {
                     loading: false,
                     studentList:studetList,
-                    error: action.payload
+                    error: null
                 }
 
                 case Actions.UPDATE_STUDENT_LIST:
-                // const studetList  = [...state.studentList,action.payload];
+                 const notupdateStudent = state.studentList.filter(stu=> stu.id !== action.payload.id )
+                 const updatedList  = [...notupdateStudent,action.payload];
                 return {
                     loading: false,
-                    studentList:[],
-                    error: action.payload
+                    studentList:updatedList,
+                    error: null
                 }
 
 
