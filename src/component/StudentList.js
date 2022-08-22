@@ -4,6 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import EditStudent from './EditStudent';
+import {BtnCellRenderer} from './BtnCellRenderer'
 
 
 const StudentList = () => {
@@ -25,7 +26,16 @@ const StudentList = () => {
     { field: 'name', filter: true, sortable: true },
     { field: 'subject', filter: true },
     { field: 'marks', filter: true },
-    { field: 'age', filter: true }
+    { field: 'age', filter: true },
+    {
+      field: 'remove',
+      cellRenderer: BtnCellRenderer,
+      cellRendererParams: {
+        clicked: function(field) {
+          alert(`${field} was clicked`);
+        },
+      },
+    }
   ])
 
   useEffect(() => {
