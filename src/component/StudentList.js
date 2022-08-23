@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef,useCallback } from 'react';
+import React, { useState, useEffect, useRef,useCallback,useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 
@@ -21,6 +21,15 @@ const StudentList = () => {
     marks:'',
     age:''
   })
+
+   const countSalaryAllEmp = useMemo(()=> {
+    for(let i=0;i<=800000000;i++){
+    }
+     return 500000000;
+   },[])  
+
+
+
   const [columnDefs] = useState([
     { field: 'id', filter: true, sortable: true },
     { field: 'name', filter: true, sortable: true },
@@ -78,6 +87,7 @@ const StudentList = () => {
         </div>
         <div class="col-5">
           <div style={{backgroundColor:'white'}}>
+            {countSalaryAllEmp}
             <EditStudent key={studentDetails.id} studentDetails={studentDetails}/>
           </div>
         </div>
